@@ -5,7 +5,7 @@ public class Call extends Instructions {
 
     @Override
     public void assemble() {
-        formatCode = String.format("%sXXXXXXXX%s", asmParts[1], "1001");
+        formatCode = String.format("%sXXXXXXXX%s", fitWidth(asmParts[1], 4), "1001");
         binaryCode = formatCodeToBinaryCode(formatCode);
     }
 }

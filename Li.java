@@ -5,7 +5,7 @@ public class Li extends Instructions {
 
     @Override
     public void assemble() {
-        formatCode = String.format("%sXXX%sXX%s", zfill(asmParts[2], 4), asmParts[1], "0110");
+        formatCode = String.format("%sXXX%sXX%s", fitWidth(asmParts[2], 4), fitWidth(asmParts[1], 3), "1111");
         binaryCode = formatCodeToBinaryCode(formatCode);
     }
 }

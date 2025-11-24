@@ -5,7 +5,7 @@ public class Load extends Instructions {
 
     @Override
     public void assemble() {
-        formatCode = String.format("0000%s%sXX%s", asmParts[2], asmParts[1], "0001");
+        formatCode = String.format("0000%s%sXX%s", fitWidth(asmParts[2], 3), fitWidth(asmParts[1], 3), "1100");
         binaryCode = formatCodeToBinaryCode(formatCode);
     }
 }

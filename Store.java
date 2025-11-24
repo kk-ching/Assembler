@@ -5,7 +5,8 @@ public class Store extends Instructions {
 
     @Override
     public void assemble() {
-        formatCode = String.format("0%s%s00000%s", asmParts[1], asmParts[2], "0010");
+        formatCode =
+                String.format("0%s%s00000%s", fitWidth(asmParts[1], 3), fitWidth(asmParts[2], 3), "1101");
         binaryCode = formatCodeToBinaryCode(formatCode);
     }
 }

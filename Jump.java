@@ -5,7 +5,7 @@ public class Jump extends Instructions {
 
     @Override
     public void assemble() {
-        formatCode = String.format("%sXXXXXXXX%s", asmParts[1], "1000");
+        formatCode = String.format("%sXXXXXXXX%s", fitWidth(asmParts[1], 4), "1000");
         binaryCode = formatCodeToBinaryCode(formatCode);
     }
 }

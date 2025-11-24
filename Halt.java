@@ -5,7 +5,7 @@ public class Halt extends Instructions {
 
     @Override
     public void assemble() {
-        formatCode = String.format("000000000000%s", "1111");
+        formatCode = String.format("000000000000%s", "1011");
         binaryCode = formatCodeToBinaryCode(formatCode);
     }
 }

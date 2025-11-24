@@ -6,58 +6,44 @@ public abstract class Instructions {
     public abstract void assemble();
 
     public Instructions(String[] cmdParts) {
-        asmParts = cmdParts;
-        resolveRegisterAddresses();
+        asmParts = new String[cmdParts.length];
+        parse(cmdParts);
         assemble();
     }
 
-    public void resolveRegisterAddresses() {
-        for (int i = 0; i < asmParts.length; i++) {
-            switch (asmParts[i]) {
-                case "$r1":
-                    asmParts[i] = "000";
-                    break;
-                case "$r2":
-                    asmParts[i] = "001";
-                    break;
-                case "$r3":
-                    asmParts[i] = "010";
-                    break;
-                case "$r4":
-                    asmParts[i] = "011";
-                    break;
-                case "$r5":
-                    asmParts[i] = "100";
-                    break;
-                case "$r6":
-                    asmParts[i] = "101";
-                    break;
-                case "$r7":
-                    asmParts[i] = "110";
-                    break;
-                case "$r8":
-                    asmParts[i] = "111";
-                    break;
-                default:
-                    break;
+    public void parse(String[] cmdParts) {
+        for (int i = 1; i < cmdParts.length; i++) {
+            String p = cmdParts[i];
+            if (p.length() > 2 && p.substring(0, 2).equals("$r")) {
+                asmParts[i] = Integer.toBinaryString((p.charAt(2) - '0') - 1);
+            } else {
+                asmParts[i] = Integer.toBinaryString(Integer.parseInt(p));
             }
         }
     }
 
-    public String getBinaryCode() {
+    public void printBinaryCode() {
         if (binaryCode.length() != 16) {
             System.out.println("Error: Binary code length is not 16 bits.");
         }
-        return binaryCode;
-    }
-    ;
-
-    public String getHexCode() {
-        return Integer.toHexString(Integer.parseInt(binaryCode, 2));
+        printFormatedBinary("Binary Code", binaryCode);
     }
 
-    public String getformatCode() {
-        return formatCode;
+    public void printHexCode() {
+        System.out.println(
+                "Hex Code:\t" + fitWidth(Integer.toHexString(Integer.parseInt(binaryCode, 2)).toUpperCase(), 4));
+    }
+
+    public void printFormatedBinary(String tag, String binaryString) {
+        System.out.print(tag + ":\t");
+        for (int i = 0; i < binaryString.length(); i += 4) {
+            System.out.print(binaryString.substring(i, i + 4) + ' ');
+        }
+        System.out.print('\n');
+    }
+
+    public void printFormatCode() {
+        printFormatedBinary("Format Code", formatCode);
     }
 
     public String formatCodeToBinaryCode(String formatCode) {
@@ -65,7 +51,8 @@ public abstract class Instructions {
         return binaryCode;
     }
 
-    public String zfill(String cmdPart, int n) {
-        return String.format("%1$" + n + "s", asmParts[2]).replace(' ', '0');
+    public String fitWidth(String str, int n) {
+        str = String.format("%1$" + n + "s", str).replace(' ', '0');
+        return str.substring(str.length() - n, str.length());
     }
 }
