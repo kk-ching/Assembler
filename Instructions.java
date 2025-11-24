@@ -7,6 +7,8 @@ public abstract class Instructions {
 
     public Instructions(String[] cmdParts) {
         asmParts = cmdParts;
+        resolveRegisterAddresses();
+        assemble();
     }
 
     public void resolveRegisterAddresses() {
@@ -61,5 +63,9 @@ public abstract class Instructions {
     public String formatCodeToBinaryCode(String formatCode) {
         String binaryCode = formatCode.replace('X', '0');
         return binaryCode;
+    }
+
+    public String zfill(String cmdPart, int n) {
+        return String.format("%1$" + n + "s", asmParts[2]).replace(' ', '0');
     }
 }
