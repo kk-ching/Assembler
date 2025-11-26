@@ -1,8 +1,9 @@
 import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws java.io.FileNotFoundException {
         FileOutput fout;
         Scanner userInput = new Scanner(System.in);
 
@@ -10,7 +11,11 @@ public class Main {
         System.out.print("Enter the output file name: ");
         fileName = userInput.nextLine();
         fout = new FileOutput(fileName);
-        
+        System.out.print("Enter input file name:");
+        String inputFileName = userInput.nextLine();
+        if (!inputFileName.isEmpty()) {
+            userInput = new Scanner(new File(inputFileName));
+        }
         while (true) {
             System.out.println("Enter Operation Code (# for save file):");
             String operationCode = userInput.nextLine();
@@ -77,7 +82,7 @@ public class Main {
                     break;
                 default:
                     System.out.println("Invalid Operation Code");
-                    break;
+                    continue;
             }
             instruction.printFormatCode();
             instruction.printBinaryCode();
