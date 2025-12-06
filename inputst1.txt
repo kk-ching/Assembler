@@ -1,0 +1,8 @@
+out1
+li $r1 1
+li $r2 2
+li $r3 10
+add $r2 $r1 $r2
+ble $r2 $r3 -1
+halt
+#

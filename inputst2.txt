@@ -1,0 +1,7 @@
+out2
+li $r1 6
+li $r2 5
+andi $r3 $r1 3
+ori $r4 $r3 8
+halt
+#

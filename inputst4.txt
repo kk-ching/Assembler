@@ -1,0 +1,13 @@
+li $r1, 6
+li $r2, 4
+call 7
+move $r4, $r3
+li $r1, 7
+li $r2, 8
+call 3
+move $r5, $r3
+jump 3
+add $r3, $r1, $r2
+rtn
+halt
+#

@@ -1,0 +1,13 @@
+out3
+li $r1 6
+li $r2 5
+and $r3 $r1 $r2
+li $r8 0
+store $r3 $r8
+or $r4 $r1 $r2
+li $r8 1
+store $r4 $r8
+li $r8 1
+load $r7 $r8
+halt
+#
